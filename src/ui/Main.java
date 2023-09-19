@@ -12,7 +12,7 @@ public class Main {
         );
         while(flag){
         System.out.println("\nQue deseas hacer");
-        System.out.println("\n1. Agregar tarea\n2. Moodificar\n3. Eliminar\n4. Salir");
+        System.out.println("\n1. Agregar tarea\n2. Modificar\n3. Eliminar\n4. Salir");
         int optionMenu=reader.nextInt();
             switch(optionMenu){
             case 1:
