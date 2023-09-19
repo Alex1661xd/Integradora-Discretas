@@ -19,7 +19,6 @@ public class Main {
                 editTask();
             break;
 
-
             case 3:
                 deleteTask();
             break;
