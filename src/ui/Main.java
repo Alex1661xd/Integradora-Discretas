@@ -1,3 +1,4 @@
+package ui;
 import java.util.Scanner;
 
 public class Main {
@@ -15,10 +16,12 @@ public class Main {
             break;
 
             case 2:
+                editTask();
             break;
 
 
             case 3:
+                deleteTask();
             break;
 
             case 4:
@@ -31,6 +34,7 @@ public class Main {
     }
 
     private static void addTask(){
+        searchUser();
 
     }
 
