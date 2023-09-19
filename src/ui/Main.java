@@ -5,7 +5,11 @@ public class Main {
     static Scanner reader=new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         boolean flag=true;
-        System.out.println("\n¡Bienvenido!");
+
+        System.out.println("\n* * * * * * * * *\n"+
+                "* ¡Bienvenido! *\n" +
+                "* * * * * * * * *\n"
+        );
         while(flag){
         System.out.println("\nQue deseas hacer");
         System.out.println("\n1. Agregar tarea\n2. Modificar\n3. Eliminar\n4. Salir");
