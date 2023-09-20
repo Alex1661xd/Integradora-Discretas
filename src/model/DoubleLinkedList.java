@@ -17,7 +17,7 @@ public class DoubleLinkedList {
     }
 
     // Método para agregar un nodo al final de la lista
-    public void append(Task task) {
+    public void addAppend(Task task) {
         Node newNode = new Node(task);
         if (isEmpty()) {
             head = newNode;
@@ -30,7 +30,7 @@ public class DoubleLinkedList {
     }
 
     // Método para agregar un nodo al principio de la lista
-    public void prepend(Task task) {
+    public void AddPrepend(Task task) {
         Node newNode = new Node(task);
         if (isEmpty()) {
             head = newNode;
