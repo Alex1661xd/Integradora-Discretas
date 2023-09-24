@@ -1,9 +1,9 @@
 package model;
 
-public class DoubleLinkedList {
+public class DoubleLinkedList <E>{
 
-    private Node head; // Primer nodo de la lista
-    private Node tail; // Último nodo de la lista
+    private Node<E> head; // Primer nodo de la lista
+    private Node<E> tail; // Último nodo de la lista
 
     // Constructor para inicializar la lista vacía
     public DoubleLinkedList() {
