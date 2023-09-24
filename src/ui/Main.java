@@ -20,28 +20,31 @@ public class Main {
         
         while(flag1){
         System.out.println(colorAmarillo+"\n-"+resetColor+"  ¿Que deseas hacer?  "+colorAmarillo+"-"+resetColor);
-        System.out.println("\n1. Agregar recordatorio");
+        System.out.println("\n1. Agregar Tarea/Recordatorio");
         System.out.println("2. Agregar tarea");
         System.out.println("3. Otras opciones");
+        System.out.println("-------------------------");
         System.out.println("4. Salir");
         System.out.print(colorVerde+"\n>> "+resetColor);
         int optionMenu1=reader.nextInt();
             switch(optionMenu1){
                 
             case 1:
-                addReminder();
+                addReminderTask();
             break;
 
             case 2:
-               
-                addTask();
+                addReminderTask();
             break;
 
             case 3:
                 while(flag2){
-                    System.out.println(colorAmarillo+"\n-"+resetColor+"    OPCIONES  "+colorAmarillo+"-"+resetColor);
-                    System.out.println("\n1. Editar tarea/recordatorio");
-                    System.out.println("2. Eliminar tarea/recordatorio");
+                    System.out.println(colorMorado+"\n╔══════════════════════╗");
+                    System.out.println("║"+resetColor+"      ¡Opciones!     "+colorMorado+" ║");
+                    System.out.println("╚══════════════════════╝"+resetColor);
+                    System.out.println("\n1. Editar ");
+                    System.out.println("2. Eliminar");
+                    System.out.println("-------------------------");
                     System.out.println("3. Volver");
                     int optionMenu2=reader.nextInt();
 
@@ -53,6 +56,9 @@ public class Main {
                             deleteTaskReminder();
                             break;
                         case 3:
+                        System.out.println(colorMorado+"\n╔══════════════════════╗");
+                        System.out.println("║"+resetColor+"        ¡MENU!     "+colorMorado+"   ║");
+                        System.out.println("╚══════════════════════╝"+resetColor);
                             flag2=false;
                             break;
                     }
@@ -67,14 +73,18 @@ public class Main {
         
     }
 
-    private static boolean addReminder(){
-        System.out.println();
+    private static boolean addReminderTask(){
+        System.out.println("\nIngrese el Titulo");
+        reader.nextLine();
+        String title=reader.nextLine();
+        System.out.println("\nIngrese la descripcion");
+        String descripcion=reader.nextLine();
+        System.out.println("\nIngrese la fecha limite (dd/MM/yyyy)");
+        String fecha=reader.nextLine();
+        System.out.println("\n¿Es prioritaria?");
+        System.out.println("1. SI\n2. NO");
+        int priority=reader.nextInt();
         return false;
-    }
-
-    private static void addTask(){
-
-
     }
 
     private static void editTaskReminder(){
