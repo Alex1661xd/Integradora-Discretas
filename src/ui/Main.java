@@ -6,76 +6,84 @@ public class Main {
 
     static Scanner reader=new Scanner(System.in);
     static RSystem controller=new RSystem();
+    static String colorMorado= "\u001B[35m";
+    static String resetColor = "\u001B[0m";
+    static String colorAmarillo="\u001B[33m";
+    static String colorRGB="\u001B[38;5;12m";
+    static String colorVerde="\u001B[32m";
     public static void main(String[] args) throws Exception {
-        boolean flag=true;
-        System.out.println("\n¡Bienvenido!");
-        while(flag){
-        System.out.println("\n¿Que deseas hacer?");
-        System.out.println("\n1. Nuevo Usuario");
-        System.out.println("2. Usuario Existente");
-
+        System.out.println(colorMorado+"╔══════════════════════╗");
+        System.out.println("║"+resetColor+"     ¡Bienvenido!     "+colorMorado+"║");
+        System.out.println("╚══════════════════════╝"+resetColor);
+        boolean flag1=true;
+        boolean flag2=true;
+        
+        while(flag1){
+        System.out.println(colorAmarillo+"\n-"+resetColor+"  ¿Que deseas hacer?  "+colorAmarillo+"-"+resetColor);
+        System.out.println("\n1. Agregar recordatorio");
+        System.out.println("2. Agregar tarea");
+        System.out.println("3. Otras opciones");
+        System.out.println("4. Salir");
+        System.out.print(colorVerde+"\n>> "+resetColor);
         int optionMenu1=reader.nextInt();
             switch(optionMenu1){
+                
             case 1:
-                reader.nextLine();
-                System.out.print(">> ");
-                System.out.println("Ingrese su nombre");
-                String nameUser=reader.nextLine();
-                System.out.print(">> ");
-                System.out.println("Ingrese su id (Recuerde. Ex. ABC-123)");
-                String idUser=reader.nextLine();
-                if(addUserArray(nameUser, idUser)){
-                    System.out.println("\n-Usuario añadido con exito-");
-                }else{
-                    System.out.println("\n-Ocurrio un error inesperado-");
-                }
+                addReminder();
             break;
 
             case 2:
-                System.out.println("\n¿Que usuario desea ver?");
-                if(controller.printUsers().equals("")){
-                    System.out.println("\n-No hay usuarios creados-");
-                }else{
-                    System.out.println(controller.printUsers());
-                }
-                
-                editTask();
+               
+                addTask();
             break;
 
             case 3:
-                deleteTask();
-            break;
+                while(flag2){
+                    System.out.println(colorAmarillo+"\n-"+resetColor+"    OPCIONES  "+colorAmarillo+"-"+resetColor);
+                    System.out.println("\n1. Editar tarea/recordatorio");
+                    System.out.println("2. Eliminar tarea/recordatorio");
+                    System.out.println("3. Volver");
+                    int optionMenu2=reader.nextInt();
 
+                    switch(optionMenu2){
+                        case 1:
+                            editTaskReminder();
+                            break;
+                        case 2:
+                            deleteTaskReminder();
+                            break;
+                        case 3:
+                            flag2=false;
+                            break;
+                    }
+                }
+                break;
             case 4:
                 System.out.println("Hasta luego");
-                flag=false;
+                flag1=false;
             break;
         }
         }
         
     }
 
-    private static boolean addUserArray(String name, String idUser){
-        return controller.addUser(name, idUser);
+    private static boolean addReminder(){
+        System.out.println();
+        return false;
     }
 
     private static void addTask(){
-        searchUser();
+
 
     }
 
-    private static void editTask(){
+    private static void editTaskReminder(){
 
     }
 
-    private static void deleteTask(){
+    private static void deleteTaskReminder(){
 
     }
 
-    private static int searchUser(){
-        
-        
-        
-        return -1;
-    }
+ 
 }
