@@ -49,6 +49,7 @@ public class Main {
                     System.out.println("2. Eliminar");
                     System.out.println("-------------------------");
                     System.out.println("3. Volver");
+                    System.out.print(colorVerde + "\n>> " + resetColor);
                     int optionMenu2 = reader.nextInt();
 
                     switch (optionMenu2) {
