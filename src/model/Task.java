@@ -7,16 +7,34 @@ public class Task {
 
     private String title;
 
+    private String identifier;
+
     private String description;
 
-    private Calendar date;
+    private String date;
+
+    private TypePriority TipoPrioridad;
 
     
     
-    public Task(String title, String description, Calendar date) {
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public TypePriority getTipoPrioridad() {
+        return TipoPrioridad;
+    }
+
+    public void setTipoPrioridad(TypePriority tipoPrioridad) {
+        TipoPrioridad = tipoPrioridad;
+    }
+
+    public Task(String title, String description, String date, TypePriority TipoPrioridad, String identifier) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.TipoPrioridad= TipoPrioridad;
+        this.identifier=identifier;
     }
 
     public String getTitle() {
@@ -35,13 +53,13 @@ public class Task {
         this.description = description;
     }
 
-    public Calendar getDate() {
+    /*public Calendar getDate() {
         return date;
     }
 
     public void setDate(Calendar date) {
         this.date = date;
-    }
+    }*/
 
     public String fechaString(Calendar fecha){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -50,7 +68,15 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nDescription: " + description + "\nDate: " + fechaString(this.date);
+        return "Title: " + title + "\nDescription: " + description + "\nDate: " + date;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     
