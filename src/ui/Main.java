@@ -33,46 +33,45 @@ public class Main {
 
             switch (optionMenu) {
 
+                case 1:
+                    addReminderTask();
+                    break;
+
+                case 2:
+                    addReminderTask();
+                    break;
+
+                case 3:
+                    System.out.println(colorMorado + "\n╔══════════════════════╗");
+                    System.out.println("║" + resetColor + "      ¡Opciones!     " + colorMorado + " ║");
+                    System.out.println("╚══════════════════════╝" + resetColor);
+                    System.out.println("\n1. Editar ");
+                    System.out.println("2. Eliminar");
+                    System.out.println("-------------------------");
+                    System.out.println("3. Volver");
+                    int optionMenu2 = reader.nextInt();
+
+                    switch (optionMenu2) {
                         case 1:
-                            addReminderTask();
+                            editTaskReminder();
                             break;
-
                         case 2:
-                            addReminderTask();
+                            deleteTaskReminder();
                             break;
-
                         case 3:
-
-                                System.out.println(colorMorado + "\n╔══════════════════════╗");
-                                System.out.println("║" + resetColor + "      ¡Opciones!     " + colorMorado + " ║");
-                                System.out.println("╚══════════════════════╝" + resetColor);
-                                System.out.println("\n1. Editar ");
-                                System.out.println("2. Eliminar");
-                                System.out.println("-------------------------");
-                                System.out.println("3. Volver");
-                                int optionMenu2 = reader.nextInt();
-
-                                switch (optionMenu2) {
-                                    case 1:
-                                        editTaskReminder();
-                                        break;
-                                    case 2:
-                                        deleteTaskReminder();
-                                        break;
-                                    case 3:
-                                        System.out.println(colorMorado + "\n╔══════════════════════╗");
-                                        System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
-                                        System.out.println("╚══════════════════════╝" + resetColor);
-                                        flag = false;
-                                        break;
-                                }
-
-                            break;
-                        case 4:
-                            System.out.println("Hasta luego");
+                            System.out.println(colorMorado + "\n╔══════════════════════╗");
+                            System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
+                            System.out.println("╚══════════════════════╝" + resetColor);
                             flag = false;
                             break;
                     }
+
+                    break;
+                case 4:
+                    System.out.println("Hasta luego");
+                    flag = false;
+                    break;
+            }
         }
     }
 
