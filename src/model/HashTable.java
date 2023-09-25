@@ -101,20 +101,27 @@ public class HashTable<K, V> implements IHashTable<K,V> {
         StringBuilder stringBuilder = new StringBuilder();
         
         for (int i = 0; i < table.length; i++) {
-            stringBuilder.append("Index ").append(i).append(": ");
-            
-            Node<K, V> currentNode = table[i];
-            
-            while (currentNode != null) {
-                stringBuilder.append("(").append(currentNode.getKey()).append(", ").append(currentNode.getValue()).append(") ");
-                currentNode = currentNode.getNext();
+            if(table[i]==null){
+                stringBuilder.append("Posicion "+"["+i+"]"+": Vacia");
+            }else{
+                stringBuilder.append("Index ").append(i).append(": ");
+
+                Node<K, V> currentNode = table[i];
+
+                while (currentNode != null) {
+                    stringBuilder.append("(").append(currentNode.getKey()).append(", ").append(currentNode.getValue()).append(") ");
+                    currentNode = currentNode.getNext();
+                }
             }
+
             
             stringBuilder.append("\n");
         }
         
         return stringBuilder.toString();
     }
+
+
     
 
 }

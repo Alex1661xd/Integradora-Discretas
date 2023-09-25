@@ -6,13 +6,9 @@ public class Task {
     
 
     private String title;
-
     private String identifier;
-
     private String description;
-
     private String date;
-
     private TypePriority TipoPrioridad;
 
     

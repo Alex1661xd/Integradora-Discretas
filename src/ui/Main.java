@@ -91,6 +91,14 @@ public class Main {
     }
 
     private static void editTaskReminder() {
+        System.out.println("Estas son las tareas que tienes creadas: ");
+        System.out.println(controller.taskCreated());
+
+        System.out.println("Ingrese el identificador de la tarea a editar: ");
+        reader.nextLine();
+        String id = reader.nextLine();
+        System.out.println(controller.taskValue(id));
+
 
     }
 
