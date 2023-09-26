@@ -48,8 +48,9 @@ public class Main {
                     System.out.println("\n1. Editar ");
                     System.out.println("2. Eliminar");
                     System.out.println("3. Mostrar tareas por orden de llegada");
+                    System.out.println("4. Mostrar historial de acciones");
                     System.out.println("-------------------------");
-                    System.out.println("4. Volver");
+                    System.out.println("5. Volver");
                     System.out.print(colorVerde + "\n>> " + resetColor);
                     int optionMenu2 = reader.nextInt();
 
@@ -60,7 +61,7 @@ public class Main {
                         case 2:
                             deleteTaskReminder();
                             break;
-                        case 4:
+                        case 5:
                             System.out.println(colorMorado + "\n╔══════════════════════╗");
                             System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
                             System.out.println("╚══════════════════════╝" + resetColor);
@@ -69,6 +70,11 @@ public class Main {
                         case 3:
                             printQueue();
                             break;
+                        case 4:
+                            System.out.println("Estas son las acciones que has hecho: ");
+                            printHistorial();
+                            break;
+
                     }
 
                     break;
@@ -160,5 +166,9 @@ public class Main {
 
     private static void printQueue(){
         System.out.println(controller.printQueue());
+    }
+
+    private static void printHistorial(){
+        System.out.println(controller.printHistorial());
     }
 }
