@@ -43,12 +43,14 @@ public class Main {
                     System.out.println(colorMorado + "\n╔══════════════════════╗");
                     System.out.println("║" + resetColor + "      ¡Options!      " + colorMorado + " ║");
                     System.out.println("╚══════════════════════╝" + resetColor);
+
                     System.out.println("\n1. Edit task ");
                     System.out.println("2. Delete task");
                     System.out.println("3. Show tasks in order of arrival");
                     System.out.println("-------------------------");
                     System.out.println("4. Back");
                     System.out.print(colorAzul + "\n>> " + resetColor);
+
                     int optionMenu2 = reader.nextInt();
 
                     switch (optionMenu2) {
@@ -58,7 +60,7 @@ public class Main {
                         case 2:
                             deleteTaskReminder();
                             break;
-                        case 4:
+                        case 5:
                             System.out.println(colorMorado + "\n╔══════════════════════╗");
                             System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
                             System.out.println("╚══════════════════════╝" + resetColor);
@@ -67,6 +69,11 @@ public class Main {
                         case 3:
                             printQueue();
                             break;
+                        case 4:
+                            System.out.println("Estas son las acciones que has hecho: ");
+                            printHistorial();
+                            break;
+
                     }
 
                     break;
@@ -158,5 +165,9 @@ public class Main {
 
     private static void printQueue(){
         System.out.println(controller.printQueue());
+    }
+
+    private static void printHistorial(){
+        System.out.println(controller.printHistorial());
     }
 }
