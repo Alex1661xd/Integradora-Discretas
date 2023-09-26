@@ -9,26 +9,28 @@ public class Main {
     static String colorMorado = "\u001B[35m";
     static String resetColor = "\u001B[0m";
     static String colorAmarillo = "\u001B[33m";
-    static String colorRGB = "\u001B[38;5;12m";
+    static String colorAzul = "\u001B[38;5;12m";
+    static String colorRojo = "\u001B[31m";
     static String colorVerde = "\u001B[32m";
+    static String colorNaranja = "\u001B[38;5;208m";
+
 
     public static void main(String[] args) throws Exception {
 
         boolean flag = true;
 
         System.out.println(colorMorado + "╔══════════════════════╗");
-        System.out.println("║" + resetColor + "     ¡Bienvenido!     " + colorMorado + "║");
+        System.out.println("║" + resetColor + "       ¡Welcome!      " + colorMorado + "║");
         System.out.println("╚══════════════════════╝" + resetColor);
 
         while(flag) {
 
-            System.out.println(colorAmarillo + "\n-" + resetColor + "  ¿Que deseas hacer?  " + colorAmarillo + "-" + resetColor);
-            System.out.println("\n1. Agregar Tarea/Recordatorio");
-            System.out.println("2. Agregar tarea");
-            System.out.println("3. Otras opciones");
+            System.out.println(colorAmarillo + "\n-" + resetColor + " What do you want to do? " + colorAmarillo + "-" + resetColor);
+            System.out.println("\n1. Add task/Reminder");
+            System.out.println("2. Other options");
             System.out.println("-------------------------");
-            System.out.println("4. Salir");
-            System.out.print(colorVerde + "\n>> " + resetColor);
+            System.out.println("3. Exit");
+            System.out.print(colorAzul + "\n>> " + resetColor);
             int optionMenu = reader.nextInt();
 
             switch (optionMenu) {
@@ -38,20 +40,17 @@ public class Main {
                     break;
 
                 case 2:
-                    addReminderTask();
-                    break;
-
-                case 3:
                     System.out.println(colorMorado + "\n╔══════════════════════╗");
-                    System.out.println("║" + resetColor + "      ¡Opciones!     " + colorMorado + " ║");
+                    System.out.println("║" + resetColor + "      ¡Options!      " + colorMorado + " ║");
                     System.out.println("╚══════════════════════╝" + resetColor);
-                    System.out.println("\n1. Editar ");
-                    System.out.println("2. Eliminar");
-                    System.out.println("3. Mostrar tareas por orden de llegada");
-                    System.out.println("4. Mostrar historial de acciones");
+
+                    System.out.println("\n1. Edit task ");
+                    System.out.println("2. Delete task");
+                    System.out.println("3. Show tasks in order of arrival");
                     System.out.println("-------------------------");
-                    System.out.println("5. Volver");
-                    System.out.print(colorVerde + "\n>> " + resetColor);
+                    System.out.println("4. Back");
+                    System.out.print(colorAzul + "\n>> " + resetColor);
+
                     int optionMenu2 = reader.nextInt();
 
                     switch (optionMenu2) {
@@ -78,8 +77,8 @@ public class Main {
                     }
 
                     break;
-                case 4:
-                    System.out.println("Hasta luego");
+                case 3:
+                    System.out.println(colorAmarillo + "Good bye!!!");
                     flag = false;
                     break;
             }
@@ -87,62 +86,62 @@ public class Main {
     }
 
     private static void addReminderTask() {
-        System.out.println("\nIngrese el identificador");
+        System.out.println("\nEnter the identifier");
         reader.nextLine();
         String identifier=reader.nextLine();
-        System.out.println("\nIngrese el Titulo");
+        System.out.println("\nEnter the title");
         String title = reader.nextLine();
-        System.out.println("\nIngrese la descripcion");
+        System.out.println("\nEnter the description");
         String descripcion = reader.nextLine();
-        System.out.println("\nIngrese la fecha limite (dd/MM/yyyy)");
+        System.out.println("\nEnter the deadline (dd/MM/yyyy)");
         String fecha = reader.nextLine();
-        System.out.println("\n¿Es prioritaria?");
+        System.out.println("\nIs it a priority??");
         System.out.println("1. SI\n2. NO");
         int priority = reader.nextInt();
 
         if(controller.addTask(identifier, title, descripcion, fecha, priority)){
-            System.out.println("\nSe agrego correctamente");
+            System.out.println(colorVerde + "\nAdded successfully");
         }else{
-            System.out.println("\nOcurrio un error al agregar");
+            System.out.println(colorRojo + "\nAn error occurred while adding");
         }
         
     }
 
     private static void editTaskReminder() {
-        System.out.println("Estas son las tareas que tienes creadas: \n");
+        System.out.println("These are the tasks you have created: \n");
         if(controller.taskCreated()==""){
-            System.out.println("\n-No hay nada creado-");
+            System.out.println(colorRojo + "\n-There is nothing created-");
         }else{
         System.out.println(controller.taskCreated());
-        System.out.println("Ingrese el identificador de la tarea a editar: ");
+        System.out.println("Enter the identifier of the task to edit: ");
         reader.nextLine();
         String id = reader.nextLine();
         System.out.println(controller.taskValue(id));
 
-        System.out.println("\n¿Que elementos deseas cambiar?\n\n1.Identifier\n2.Titulo\n3.Descripcion\n4.Fecha prioridad");
+        System.out.println("\nWhat elements do you want to change?\n\n1.Identifier\n2.Title\n3.Description\n4.Priority date");
         int option=reader.nextInt();
         String nuevoValor=null;
         if(option==1){
-            System.out.println("\nSi cambias el identificador, se puede cambiar su ubicacion");
-            System.out.println("Ingrese el nuevo valor");
+            System.out.println("\nIf you change the identifier, its location can be changed");
+            System.out.println("Enter the new value");
             reader.nextLine();
             nuevoValor=reader.nextLine();
         }else{
-            System.out.println("Ingrese el nuevo valor");
+            System.out.println("Enter the new value");
             reader.nextLine();
             nuevoValor=reader.nextLine();
         }
 
         if(controller.editTask(id, nuevoValor, option)){
-            System.out.println("Editado con exito");
-            System.out.println("Asi quedo editada: ");
+            System.out.println(colorVerde + "Edited successfully");
+            System.out.println("This is how it was edited: ");
                 if(option==1){
                     System.out.println("\n"+controller.taskValue(nuevoValor));
                 }else{
                     System.out.println("\n"+controller.taskValue(id));
                 }
         }else{
-            System.out.println("Ocurrio un error inesperado");
+            System.out.println(colorNaranja + "An unexpected error occurred");
         }
         }
     }
@@ -150,16 +149,16 @@ public class Main {
     private static void deleteTaskReminder() {
         
         if(controller.taskCreated()==""){
-            System.out.println("\n-No hay nada creado-");
+            System.out.println("\n-There is nothing created-");
         }else{
             System.out.println(controller.taskCreated());
-            System.out.println("Ingrese el identificador de la tarea a eliminar: ");
+            System.out.println("Enter the identifier of the task to delete: ");
             reader.nextLine();
             String id = reader.nextLine();
             if(controller.deleteTask(id)){
-                System.out.println("Se elimino correctamente");
+                System.out.println(colorVerde + "It was deleted correctly");
             }else{
-                System.out.println("Ocurrio un error inesperado");
+                System.out.println(colorNaranja + "An unexpected error occurred");
             }
         }
     }
