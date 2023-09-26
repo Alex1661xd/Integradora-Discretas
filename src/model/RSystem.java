@@ -11,12 +11,30 @@ public class RSystem {
 
         //addTask("123A", "Español","Esta tarea es de poemas", "10/10/23",2);
     }
-    
+
     public boolean addTask(String key, String title, String description, String fechaLimit, int priority){
-        
-        return false;
+
+        TypePriority tipoPrioridad=null;
+        if(priority==1){
+            tipoPrioridad=TypePriority.PRIORITY;
+        }else{
+            tipoPrioridad=TypePriority.NO_PRIORITY;
+
+        }
+        //Crea una nueva tarea o recordatorio con los datos ingresados por el usuario
+        Task nuevaTarea = new Task(title, description, fechaLimit, tipoPrioridad, key);
+        //Inserta en la tabla hash  el nuevo nodo
+
+        hashTable.insert(key, nuevaTarea);
+
+        if(priority==2){
+            addTaskAtQueue(nuevaTarea);
+        }
+
+        return true;
 
     }
+
 
     public boolean editTask(String identifier, String nuevoValor, int option){
 
@@ -45,5 +63,6 @@ public class RSystem {
     public String printQueue(){
         return cola.printQueue();
     }
+
 
 }
