@@ -47,8 +47,9 @@ public class Main {
                     System.out.println("╚══════════════════════╝" + resetColor);
                     System.out.println("\n1. Editar ");
                     System.out.println("2. Eliminar");
+                    System.out.println("3. Mostrar tareas por orden de llegada");
                     System.out.println("-------------------------");
-                    System.out.println("3. Volver");
+                    System.out.println("4. Volver");
                     System.out.print(colorVerde + "\n>> " + resetColor);
                     int optionMenu2 = reader.nextInt();
 
@@ -59,11 +60,14 @@ public class Main {
                         case 2:
                             deleteTaskReminder();
                             break;
-                        case 3:
+                        case 4:
                             System.out.println(colorMorado + "\n╔══════════════════════╗");
                             System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
                             System.out.println("╚══════════════════════╝" + resetColor);
                             flag = false;
+                            break;
+                        case 3:
+                            printQueue();
                             break;
                     }
 
@@ -76,9 +80,11 @@ public class Main {
         }
     }
 
-    private static boolean addReminderTask() {
-        System.out.println("\nIngrese el Titulo");
+    private static void addReminderTask() {
+        System.out.println("\nIngrese el identificador");
         reader.nextLine();
+        String identifier=reader.nextLine();
+        System.out.println("\nIngrese el Titulo");
         String title = reader.nextLine();
         System.out.println("\nIngrese la descripcion");
         String descripcion = reader.nextLine();
@@ -87,22 +93,72 @@ public class Main {
         System.out.println("\n¿Es prioritaria?");
         System.out.println("1. SI\n2. NO");
         int priority = reader.nextInt();
-        return false;
+
+        if(controller.addTask(identifier, title, descripcion, fecha, priority)){
+            System.out.println("\nSe agrego correctamente");
+        }else{
+            System.out.println("\nOcurrio un error al agregar");
+        }
+        
     }
 
     private static void editTaskReminder() {
-        System.out.println("Estas son las tareas que tienes creadas: ");
+        System.out.println("Estas son las tareas que tienes creadas: \n");
+        if(controller.taskCreated()==""){
+            System.out.println("\n-No hay nada creado-");
+        }else{
         System.out.println(controller.taskCreated());
-
         System.out.println("Ingrese el identificador de la tarea a editar: ");
         reader.nextLine();
         String id = reader.nextLine();
         System.out.println(controller.taskValue(id));
 
+        System.out.println("\n¿Que elementos deseas cambiar?\n\n1.Identifier\n2.Titulo\n3.Descripcion\n4.Fecha prioridad");
+        int option=reader.nextInt();
+        String nuevoValor=null;
+        if(option==1){
+            System.out.println("\nSi cambias el identificador, se puede cambiar su ubicacion");
+            System.out.println("Ingrese el nuevo valor");
+            reader.nextLine();
+            nuevoValor=reader.nextLine();
+        }else{
+            System.out.println("Ingrese el nuevo valor");
+            reader.nextLine();
+            nuevoValor=reader.nextLine();
+        }
 
+        if(controller.editTask(id, nuevoValor, option)){
+            System.out.println("Editado con exito");
+            System.out.println("Asi quedo editada: ");
+                if(option==1){
+                    System.out.println("\n"+controller.taskValue(nuevoValor));
+                }else{
+                    System.out.println("\n"+controller.taskValue(id));
+                }
+        }else{
+            System.out.println("Ocurrio un error inesperado");
+        }
+        }
     }
 
     private static void deleteTaskReminder() {
+        
+        if(controller.taskCreated()==""){
+            System.out.println("\n-No hay nada creado-");
+        }else{
+            System.out.println(controller.taskCreated());
+            System.out.println("Ingrese el identificador de la tarea a eliminar: ");
+            reader.nextLine();
+            String id = reader.nextLine();
+            if(controller.deleteTask(id)){
+                System.out.println("Se elimino correctamente");
+            }else{
+                System.out.println("Ocurrio un error inesperado");
+            }
+        }
+    }
 
+    private static void printQueue(){
+        System.out.println(controller.printQueue());
     }
 }

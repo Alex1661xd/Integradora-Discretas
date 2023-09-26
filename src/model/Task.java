@@ -64,7 +64,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nDescription: " + description + "\nDate: " + date;
+        return "\nIdentifier: "+identifier+"\nTitle: " + title + "\nDescription: " + description + "\nDate: " + date;
     }
 
     public String getIdentifier() {

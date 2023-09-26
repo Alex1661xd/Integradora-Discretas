@@ -57,65 +57,61 @@ public class HashTable<K, V> implements IHashTable<K,V> {
     
 
     @Override
-    public void delete(K key) {
+    public boolean delete(K key) {
         int index = FunctionHash(key); // Calcula el índice utilizando la función hash
     
         if (table[index] == null) {
             // No se encontró un nodo en ese índice, no hay nada que eliminar
-            return;
+            return false;
         } else {
             Node<K, V> currentNode = table[index];
-    
-            // Caso especial: si el nodo a eliminar es el primer nodo en el índice
-            if (currentNode.getKey().equals(key)) {
-                table[index] = currentNode.getNext();
-                if (table[index] != null) {
-                    table[index].setPrevious(null);
-                }
-                return;
-            }
+            Node<K, V> previousNode = null;
     
             // Busca el nodo con la clave para eliminarlo
             while (currentNode != null) {
                 if (currentNode.getKey().equals(key)) {
-                    Node<K, V> previousNode = currentNode.getPrevious();
                     Node<K, V> nextNode = currentNode.getNext();
-                    
+    
                     // Actualiza las referencias para eliminar el nodo
                     if (previousNode != null) {
                         previousNode.setNext(nextNode);
+                    } else {
+                        table[index] = nextNode; // Si es el primer nodo, actualiza la referencia de la tabla
                     }
+    
                     if (nextNode != null) {
                         nextNode.setPrevious(previousNode);
                     }
-                    return;
+    
+                    return true; // Nodo eliminado exitosamente
                 }
+                previousNode = currentNode;
                 currentNode = currentNode.getNext();
             }
         }
+        return false; // No se encontró el nodo con la clave
     }
     
 
     @Override
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        
+        stringBuilder.append("");
         for (int i = 0; i < table.length; i++) {
             if(table[i]==null){
-                stringBuilder.append("Posicion "+"["+i+"]"+": Vacia");
+                continue;
             }else{
-                stringBuilder.append("Index ").append(i).append(": ");
+                stringBuilder.append("Index [").append(i).append("]: ");
 
                 Node<K, V> currentNode = table[i];
 
                 while (currentNode != null) {
-                    stringBuilder.append("(").append(currentNode.getKey()).append(", ").append(currentNode.getValue()).append(") ");
+                    stringBuilder.append("\n- (").append(currentNode.getKey()).append(", ").append(((Task)currentNode.getValue()).getTitle()).append(") ");
                     currentNode = currentNode.getNext();
                 }
+                stringBuilder.append("\n");
             }
-
-            
-            stringBuilder.append("\n");
+ 
         }
         
         return stringBuilder.toString();
