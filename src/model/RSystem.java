@@ -35,11 +35,28 @@ public class RSystem {
 
     }
 
-
     public boolean editTask(String identifier, String nuevoValor, int option){
+        boolean flag=false;
 
-        return false;
-        
+        Task tareaEncontrado=hashTable.search(identifier);
+
+        if(option==2){
+            tareaEncontrado.setTitle(nuevoValor);
+            flag=true;
+        }else if(option==3){
+            tareaEncontrado.setDescription(nuevoValor);
+            flag=true;
+        }else if(option==4){
+            tareaEncontrado.setDate(nuevoValor);
+            flag=true;
+        }else if(option==1){
+            hashTable.delete(identifier);
+            tareaEncontrado.setIdentifier(nuevoValor);
+            hashTable.insert(nuevoValor, tareaEncontrado);
+
+            flag=true;
+        }
+        return flag;
     }
 
     public String taskValue(String id) {
