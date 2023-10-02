@@ -65,7 +65,7 @@ public class Stack<T> {
         Node<T> current = top;
         String msg="    Stack: ";
         while (current != null) {
-            msg+=current.data + "\n";
+            msg+=((Task)current.data).getDescriptionUseRealized() + "\n";
             current = current.next;
         }
         return msg;// Imprime una línea en blanco al final para una mejor presentación.
