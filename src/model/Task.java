@@ -2,8 +2,7 @@ package model;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
-public class Task {
-    
+public class Task implements Comparable<Task> {
 
     private String title;
     private String identifier;
@@ -11,7 +10,6 @@ public class Task {
     private String date;
     private TypePriority TipoPrioridad;
 
-    
     
     public void setDate(String date) {
         this.date = date;
