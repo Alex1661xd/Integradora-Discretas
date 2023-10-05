@@ -59,8 +59,10 @@ public class Stack<T extends Comparable<T>> {
         Node<T> current = top;
         StringBuilder msg = new StringBuilder("Stack:\n");
         while (current != null) {
-            msg.append(current.getData()).append("\n");
-            current = current.getNext();
+
+            msg+=((Task)current.data).getDescriptionUseRealized() + "\n";
+            current = current.next;
+ 
         }
         return msg.toString();
     }
