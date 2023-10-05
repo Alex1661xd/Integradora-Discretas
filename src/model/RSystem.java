@@ -45,10 +45,11 @@ public class RSystem {
         return true;
     }
 
+
     public boolean editTask(String identifier, String nuevoValor, int option){
 
 
-        boolean flag=false;
+        boolean flag = false;
 
         Task tareaEncontrado=hashTable.search(identifier);
         tareaEncontrado.setPosicionEditAtributo(option);

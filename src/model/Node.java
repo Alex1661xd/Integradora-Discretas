@@ -1,46 +1,28 @@
 package model;
 
-public class Node<K, V> {
+public class Node<T extends Comparable<T>> {
+    private T data;
+    private Node<T> next;
 
-    private K key;
-    private V value;
-    private Node<K, V> next;
-    private Node<K, V> previous;
-
-    public Node(K key, V value) {
-        this.key = key;
-        this.value = value;
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
     }
 
-    public K getKey() {
-        return key;
+    public T getData() {
+        return data;
     }
 
-    public void setKey(K key) {
-        this.key = key;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public V getValue() {
-        return value;
-    }
-
-    public void setValue(V value) {
-        this.value = value;
-    }
-
-    public Node<K, V> getNext() {
+    public Node<T> getNext() {
         return next;
     }
 
-    public void setNext(Node<K, V> next) {
+    public void setNext(Node<T> next) {
         this.next = next;
     }
-
-    public Node<K, V> getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Node<K, V> previous) {
-        this.previous = previous;
-    }
 }
+

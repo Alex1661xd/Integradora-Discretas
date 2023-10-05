@@ -5,8 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Task {
-    
+public class Task implements Comparable<Task> {
 
     private String title;
     private String identifier;
@@ -18,6 +17,7 @@ public class Task {
     private String valorAnterior;
     private int posicionEditAtributo;
     
+
     public Task(String title, String description, String date, TypePriority TipoPrioridad, String identifier, String descriptionUseRealized) {
         this.title = title;
         this.description = description;
@@ -27,6 +27,8 @@ public class Task {
         this.descriptionUseRealized=descriptionUseRealized;
     }
     
+
+
     public void setDate(String date) {
         this.date = date;
     }
