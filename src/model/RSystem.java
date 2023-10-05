@@ -35,13 +35,13 @@ public class RSystem {
         return true;
 
     }
-
+    
     public boolean editTask(String identifier, String nuevoValor, int option){
 
         addActionStack("\nSe edito una tarea creada", option, identifier, 2);
         return false;
 
-        boolean flag=false;
+        boolean flag = false;
 
         Task tareaEncontrado=hashTable.search(identifier);
 
