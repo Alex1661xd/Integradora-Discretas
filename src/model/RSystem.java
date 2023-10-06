@@ -5,7 +5,7 @@ public class RSystem {
 
     private HashTable<String, Task> hashTable;
     private Queue<Task> cola=new Queue<>();
-    private Stack<String> historialAcciones=new Stack<>();
+    private Stack<Task> historialAcciones=new Stack<>();
 
     public RSystem(){
         this.hashTable= new HashTable<>(25);
@@ -20,14 +20,13 @@ public class RSystem {
             tipoPrioridad=TypePriority.PRIORITY;
         }else{
             tipoPrioridad=TypePriority.NO_PRIORITY;
-
         }
         //Crea una nueva tarea o recordatorio con los datos ingresados por el usuario
-        Task nuevaTarea = new Task(title, description, fechaLimit, tipoPrioridad, key);
+        Task nuevaTarea = new Task(title, description, fechaLimit, tipoPrioridad, key, "");
         //Inserta en la tabla hash  el nuevo nodo
 
         hashTable.insert(key, nuevaTarea);
-        addActionStack("\nSe creo una tarea", 1, key, 1);
+        addActionStack("\n-[Se creo una tarea]-", 0, hashTable.search(key), 1);
         if(priority==2){
             addTaskAtQueue(nuevaTarea);
         }
@@ -36,33 +35,79 @@ public class RSystem {
 
     }
 
+    public boolean addTastWithTask(Task tarea){
+        hashTable.insert(tarea.getIdentifier(), tarea);
+        addActionStack("\n-[Se creo una tarea]-", 1, hashTable.search(tarea.getIdentifier()), 1);
+        if(tarea.getTipoPrioridad()==TypePriority.NO_PRIORITY){
+            addTaskAtQueue(tarea);
+            return true;
+        }
+        return true;
+    }
+
+
     public boolean editTask(String identifier, String nuevoValor, int option){
 
-        addActionStack("\nSe edito una tarea creada", option, identifier, 2);
-        return false;
 
-        boolean flag=false;
+        boolean flag = false;
 
         Task tareaEncontrado=hashTable.search(identifier);
-
+        tareaEncontrado.setPosicionEditAtributo(option);
         if(option==2){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getTitle());
             tareaEncontrado.setTitle(nuevoValor);
+            addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
             flag=true;
         }else if(option==3){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getDescription());
             tareaEncontrado.setDescription(nuevoValor);
+            addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
             flag=true;
         }else if(option==4){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getDate());
             tareaEncontrado.setDate(nuevoValor);
+            addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
             flag=true;
         }else if(option==1){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getIdentifier());
             hashTable.delete(identifier);
             tareaEncontrado.setIdentifier(nuevoValor);
             hashTable.insert(nuevoValor, tareaEncontrado);
+            addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
 
             flag=true;
         }
         return flag;
 
+    }
+
+    public boolean editTaskWithTask(Task tareaEncontrado, String valorAnterior, int optionEdit){
+        boolean flag=false;
+        if(optionEdit==2){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getTitle());
+            tareaEncontrado.setTitle(valorAnterior);
+            addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
+            flag=true;
+        }else if(optionEdit==3){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getDescription());
+            tareaEncontrado.setDescription(valorAnterior);
+            addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
+            flag=true;
+        }else if(optionEdit==4){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getDate());
+            tareaEncontrado.setDate(valorAnterior);
+            addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
+            flag=true;
+        }else if(optionEdit==1){
+            tareaEncontrado.setValorAnterior(tareaEncontrado.getIdentifier());
+            hashTable.delete(tareaEncontrado.getIdentifier());
+            tareaEncontrado.setIdentifier(valorAnterior);
+            hashTable.insert(valorAnterior, tareaEncontrado);
+            addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
+
+            flag=true;
+        }
+        return flag;
     }
 
     public String taskValue(String id) {
@@ -76,7 +121,7 @@ public class RSystem {
     }
 
     public boolean deleteTask(String id){
-        addActionStack("\nSe elimino una tarea", 1, id, 3);
+        addActionStack("\n-[Se elimino una tarea]-", 0, hashTable.search(id), 3);
         return hashTable.delete(id);
     }
 
@@ -88,33 +133,58 @@ public class RSystem {
         return cola.printQueue();
     }
 
-    public void addActionStack(String actionR, int optionEditTask, String identifier, int optionRegist){
-        String mensajeHistorial="";
-        //1 significa que desea registrar la creacion de una tarea
-        if(optionRegist==1){
-            mensajeHistorial=actionR+"\nEl identificador de la nueva tarea es: ["+identifier+"]";
-        }else if(optionRegist==2){
-            mensajeHistorial=actionR+" \nSu identificador es: ["+identifier+"]";
+    public void addActionStack(String actionR, int optionEditTask, Task tarea, int optionRegist){
+        String actionString="\nEl identificador de la tarea es ["+tarea.getIdentifier()+"]";
+        tarea.setTypeModification(optionRegist);
+        tarea.setPosicionEditAtributo(optionEditTask);
+        if(optionRegist==2){
+                
                 if(optionEditTask==1){
-                    mensajeHistorial+="\nEn la tarea se edito el Identificador";
+                    actionR+="\nEn la tarea se edito el Identificador";
                 }else if(optionEditTask==2){
-                    mensajeHistorial+="\nEn la tarea se edito el Titulo";
+                    actionR+="\nEn la tarea se edito el Titulo";
                 }else if(optionEditTask==3){
-                    mensajeHistorial+="\nEn la tarea se edito la descripcion";
+                    actionR+="\nEn la tarea se edito la descripcion";
                 }else{
-                    mensajeHistorial+="\nEn la tarea se edito la fecha";
+                    actionR+="\nEn la tarea se edito la fecha";
                 }
-        }else if(optionEditTask==3){
-            mensajeHistorial+="\nEl usuario elimino una tarea con el identificador: "+identifier;
         }
-
-        historialAcciones.push(mensajeHistorial);
-
-        
+        actionR+=actionString;
+        tarea.setDescriptionUseRealized(actionR);
+        historialAcciones.push(tarea);
     }
 
     public String printHistorial(){
         return historialAcciones.printStack();
     }
 
-}
+    public String printLastAction(){
+        return historialAcciones.peek().getDescriptionUseRealized();
+    }
+
+    public int obtenerMoficiacion(){
+        return historialAcciones.peek().getTypeModification();
+    }
+
+    public Task obtenerUltimaTarea(){
+        return historialAcciones.peek();
+    }
+
+    public boolean deshacerAccion(Task tarea){
+        if(tarea.getTypeModification()==1){
+            deleteTask(tarea.getIdentifier());
+            historialAcciones.pop();
+            return true;
+        }else if(tarea.getTypeModification()==3){
+            addTastWithTask(tarea);
+            historialAcciones.pop();
+            return true;
+        }else if(tarea.getTypeModification()==2){
+            editTaskWithTask(tarea, tarea.getValorAnterior(), tarea.getPosicionEditAtributo());
+            return true;
+        }
+        
+        
+        return false;
+    }
+}   

@@ -47,8 +47,10 @@ public class Main {
                     System.out.println("\n1. Edit task ");
                     System.out.println("2. Delete task");
                     System.out.println("3. Show tasks in order of arrival");
+                    System.out.println("4. Show action history");
+                    System.out.println("5. Deshacer accion");
                     System.out.println("-------------------------");
-                    System.out.println("4. Back");
+                    System.out.println("6. Back");
                     System.out.print(colorAzul + "\n>> " + resetColor);
 
                     int optionMenu2 = reader.nextInt();
@@ -60,7 +62,7 @@ public class Main {
                         case 2:
                             deleteTaskReminder();
                             break;
-                        case 5:
+                        case 6:
                             System.out.println(colorMorado + "\n╔══════════════════════╗");
                             System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
                             System.out.println("╚══════════════════════╝" + resetColor);
@@ -73,12 +75,17 @@ public class Main {
                             System.out.println("Estas son las acciones que has hecho: ");
                             printHistorial();
                             break;
+                        case 5:
+                            System.out.println("Esta es la ultima accion realizada");
+                            printLastAction();
+
+                            break;
 
                     }
 
                     break;
                 case 3:
-                    System.out.println(colorAmarillo + "Good bye!!!");
+                    System.out.println(colorAmarillo + "Good bye!!!"+resetColor);
                     flag = false;
                     break;
             }
@@ -169,5 +176,32 @@ public class Main {
 
     private static void printHistorial(){
         System.out.println(controller.printHistorial());
+    }
+
+    private static void printLastAction(){
+        System.out.println(controller.printLastAction());
+        System.out.println("Estas seguro que deseas deshacer esta accion?");
+        if(controller.obtenerMoficiacion()==1){
+            System.out.println("Se va a eliminar esta tarea recientemente creada");
+        }else if(controller.obtenerMoficiacion()==2){
+            System.out.println("Se va a restaurar el estado anterior de la tarea (Antes de editar)");
+        }else if(controller.obtenerMoficiacion()==3){
+            System.out.println("Se va a restaurar la tarea eliminada");
+        }
+        while(true){
+            System.out.println("1. SI\n2. NO");
+            int confirmar=reader.nextInt();
+            if(confirmar==1){
+                if(controller.deshacerAccion(controller.obtenerUltimaTarea())){
+                    System.out.println("Se deshizo la ultima accion con exito");
+                    break;
+                }
+            }else if(confirmar>2||confirmar<1){
+                System.out.println("No es una opcion valida");
+            }else{
+                break;
+            }
+        }
+        
     }
 }
