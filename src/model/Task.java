@@ -1,24 +1,21 @@
 package model;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Task implements Comparable<Task> {
+
+public class Task {
+    
 
     private String title;
     private String identifier;
     private String description;
-    private String date;
+    private LocalDate date;
     private TypePriority TipoPrioridad;
     private String descriptionUseRealized;
     private int typeModification;
     private String valorAnterior;
     private int posicionEditAtributo;
     
-
-    public Task(String title, String description, String date, TypePriority TipoPrioridad, String identifier, String descriptionUseRealized) {
+    public Task(String title, String description, LocalDate date, TypePriority TipoPrioridad, String identifier, String descriptionUseRealized) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -27,9 +24,7 @@ public class Task implements Comparable<Task> {
         this.descriptionUseRealized=descriptionUseRealized;
     }
     
-
-
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -42,7 +37,7 @@ public class Task implements Comparable<Task> {
     }
 
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -72,15 +67,7 @@ public class Task implements Comparable<Task> {
         this.description = description;
     }
 
-    /*public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
-    }*/
-
-    public Date convertStringToDate(){
+    /*public Date convertStringToDate(){
         SimpleDateFormat formato = new SimpleDateFormat("MM/dd/yyyy");
         Date fecha=null;
         try {
@@ -89,7 +76,7 @@ public class Task implements Comparable<Task> {
             e.printStackTrace();
         }
         return fecha;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -104,9 +91,16 @@ public class Task implements Comparable<Task> {
         this.identifier = identifier;
     }
 
-    public int compareTo(Date fechaComparar){
-        return convertStringToDate().compareTo(fechaComparar);
+    public int compareTo(LocalDate fechaComparar) {
+        if (this.date.isBefore(fechaComparar)) {
+            return -1; // Fecha actual es anterior
+        } else if (this.date.equals(fechaComparar)) {
+            return 0;  // Fechas son iguales
+        } else {
+            return 1;  // Fecha actual es posterior
+        }
     }
+    
 
     public int getTypeModification() {
         return typeModification;

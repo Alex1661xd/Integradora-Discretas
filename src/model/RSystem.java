@@ -1,20 +1,24 @@
 package model;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RSystem {
 
     private HashTable<String, Task> hashTable;
     private Queue<Task> cola=new Queue<>();
     private Stack<Task> historialAcciones=new Stack<>();
+    private PriorityQueue colaPrioridad= new PriorityQueue(25);
 
     public RSystem(){
         this.hashTable= new HashTable<>(25);
-
-        addTask("123A", "Español","Esta tarea es de poemas", "10/10/23",2);
+        addTask("123A", "Español","Esta tarea es de poemas", LocalDate.of(2023, 10, 5),2);
+        addTask("123B", "Rojo","Esta tarea es de poemas", LocalDate.of(2023, 02, 5),1);
+        addTask("148C", "Rosado","Esta tarea es de poemas", LocalDate.of(2023, 04, 5),1);
+        addTask("985G", "Lila","Esta tarea es de poemas", LocalDate.of(2023, 07, 5),1);
     }
 
-    public boolean addTask(String key, String title, String description, String fechaLimit, int priority){
-
+    public boolean addTask(String key, String title, String description, LocalDate fechaLimit, int priority){
+        
         TypePriority tipoPrioridad=null;
         if(priority==1){
             tipoPrioridad=TypePriority.PRIORITY;
@@ -28,28 +32,36 @@ public class RSystem {
         hashTable.insert(key, nuevaTarea);
         addActionStack("\n-[Se creo una tarea]-", 0, hashTable.search(key), 1);
         if(priority==2){
-            addTaskAtQueue(nuevaTarea);
+            cola.enqueue(nuevaTarea);
+        }else if(priority==1){
+            colaPrioridad.insert(nuevaTarea);
         }
 
         return true;
 
+    }
+
+    public LocalDate convertStringToLocalDate(String fecha)throws Exception{
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaLocalDate=LocalDate.parse(fecha, formato);;
+        
+        return fechaLocalDate;
     }
 
     public boolean addTastWithTask(Task tarea){
         hashTable.insert(tarea.getIdentifier(), tarea);
         addActionStack("\n-[Se creo una tarea]-", 1, hashTable.search(tarea.getIdentifier()), 1);
         if(tarea.getTipoPrioridad()==TypePriority.NO_PRIORITY){
-            addTaskAtQueue(tarea);
+            cola.enqueue(tarea);
             return true;
         }
         return true;
     }
 
-
     public boolean editTask(String identifier, String nuevoValor, int option){
 
 
-        boolean flag = false;
+        boolean flag=false;
 
         Task tareaEncontrado=hashTable.search(identifier);
         tareaEncontrado.setPosicionEditAtributo(option);
@@ -61,11 +73,6 @@ public class RSystem {
         }else if(option==3){
             tareaEncontrado.setValorAnterior(tareaEncontrado.getDescription());
             tareaEncontrado.setDescription(nuevoValor);
-            addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
-            flag=true;
-        }else if(option==4){
-            tareaEncontrado.setValorAnterior(tareaEncontrado.getDate());
-            tareaEncontrado.setDate(nuevoValor);
             addActionStack("\n-[Se edito una tarea creada]-", option, tareaEncontrado, 2);
             flag=true;
         }else if(option==1){
@@ -91,11 +98,6 @@ public class RSystem {
         }else if(optionEdit==3){
             tareaEncontrado.setValorAnterior(tareaEncontrado.getDescription());
             tareaEncontrado.setDescription(valorAnterior);
-            addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
-            flag=true;
-        }else if(optionEdit==4){
-            tareaEncontrado.setValorAnterior(tareaEncontrado.getDate());
-            tareaEncontrado.setDate(valorAnterior);
             addActionStack("\n-[Se edito una tarea creada]-", optionEdit, tareaEncontrado, 2);
             flag=true;
         }else if(optionEdit==1){
@@ -125,8 +127,8 @@ public class RSystem {
         return hashTable.delete(id);
     }
 
-    public void addTaskAtQueue(Task tarea){
-        cola.enqueue(tarea);
+    public String printPriorityQueue(){
+        return colaPrioridad.showPriorityQueue();
     }
 
     public String printQueue(){
@@ -187,4 +189,4 @@ public class RSystem {
         
         return false;
     }
-}   
+}
