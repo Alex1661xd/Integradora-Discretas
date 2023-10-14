@@ -17,16 +17,6 @@ public class RSystem {
         addTask("985G", "Lila","Esta tarea es de poemas", LocalDate.of(2023, 07, 5),1);
     }
 
-    /**
-     * Add a new task or reminder to the system.
-     *
-     * @param key The unique key to identify the task.
-     * @param title The title of the task.
-     * @param description The description of the task.
-     * @param fechaLimit The deadline to complete the task.
-     * @param priority The priority of the task (1 for priority, 2 for non-priority).
-     * @return true if the task was added successfully, false otherwise.
-    */
     public boolean addTask(String key, String title, String description, LocalDate fechaLimit, int priority){
         
         TypePriority tipoPrioridad=null;
@@ -51,13 +41,6 @@ public class RSystem {
 
     }
 
-    /**
-    * Converts a text string in the format "dd/MM/yyyy" to a LocalDate object.
-    *
-    * @param fecha The text string representing a date in the format "dd/MM/yyyy".
-    * @return The LocalDate object corresponding to the given date.
-    * @throws Exception If there is an error parsing the date or the format is incorrect.
-    */
     public LocalDate convertStringToLocalDate(String fecha)throws Exception{
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechaLocalDate=LocalDate.parse(fecha, formato);;
@@ -65,12 +48,6 @@ public class RSystem {
         return fechaLocalDate;
     }
 
-    /**
-    * Adds an existing task to the system.
-    *
-    * @param tarea The task to add.
-    * @return true if the task was added successfully, false otherwise.
-    */
     public boolean addTastWithTask(Task tarea){
         hashTable.insert(tarea.getIdentifier(), tarea);
         addActionStack("\n-[Se creo una tarea]-", 1, hashTable.search(tarea.getIdentifier()), 1);
@@ -81,14 +58,6 @@ public class RSystem {
         return true;
     }
 
-    /**
-    * Edit an attribute of a task identified by its unique key.
-    *
-    * @param identifier The unique key of the task you want to edit.
-    * @param nuevoValor The new value to assign to the attribute.
-    * @param option The option indicating which attribute to edit (1 identifier, 2 title, 3 description).
-    * @return true if the task was edited successfully, false otherwise.
-    */
     public boolean editTask(String identifier, String nuevoValor, int option){
 
 
@@ -119,14 +88,6 @@ public class RSystem {
 
     }
 
-    /**
-    * Edit a task attribute using an existing Task object.
-    *
-    * @param tareaEncontrado The Task object to edit.
-    * @param valorAnterior The previous value of the attribute being edited.
-    * @param optionEdit The option indicating which attribute to edit (1 identifier, 2 title, 3 description).
-    * @return true if the task was edited successfully, false otherwise.
-    */
     public boolean editTaskWithTask(Task tareaEncontrado, String valorAnterior, int optionEdit){
         boolean flag=false;
         if(optionEdit==2){
@@ -151,64 +112,29 @@ public class RSystem {
         return flag;
     }
 
-    /**
-    * Gets a string representation of a task identified by its unique key.
-    *
-    * @param id The key of the task you want to obtain.
-    * @return A string representing the task information.
-    */
     public String taskValue(String id) {
         Task tareaEncontrada = hashTable.search(id);
 
         return tareaEncontrada.toString();
     }
 
-    /**
-    * Gets a string representation of the tasks created so far.
-    *
-    * @return A string representing the information of the created tasks.
-    */
     public String taskCreated(){
         return hashTable.print();
     }
 
-    /**
-    * Delete a task identified by its unique key.
-    *
-    * @param id The unique key of the task to delete.
-    * @return true if the task was successfully deleted, false otherwise.
-    */
     public boolean deleteTask(String id){
         addActionStack("\n-[Se elimino una tarea]-", 0, hashTable.search(id), 3);
         return hashTable.delete(id);
     }
 
-    /**
-    * Gets a string representation of the priority queue.
-    *
-    * @return A string representing priority queue information.
-    */
     public String printPriorityQueue(){
         return colaPrioridad.showPriorityQueue();
     }
 
-    /**
-    * Gets a string representation of the queue.
-    *
-    * @return A string representing the queue information.
-    */
     public String printQueue(){
         return cola.printQueue();
     }
 
-    /**
-    * Adds an action to the action history, along with the task and relevant information.
-    *
-    * @param actionR A string describing the action performed.
-    * @param optionEditTask The option indicating which attribute was edited (1 identifier, 2 title, 3 description, 4 date).
-    * @param tarea The task associated with the action.
-    * @param optionRegist The option indicating the type of registry (1 for creation, 2 for editing, 3 for deletion).
-    */
     public void addActionStack(String actionR, int optionEditTask, Task tarea, int optionRegist){
         String actionString="\nEl identificador de la tarea es ["+tarea.getIdentifier()+"]";
         tarea.setTypeModification(optionRegist);
@@ -230,48 +156,22 @@ public class RSystem {
         historialAcciones.push(tarea);
     }
 
-    /**
-    * Gets a string representation of the action history.
-    *
-    * @return A string representing action history information.
-    */
     public String printHistorial(){
         return historialAcciones.printStack();
     }
 
-    /**
-    * Gets a string representation of the last action performed.
-    *
-    * @return A string representing information about the last action performed.
-    */
     public String printLastAction(){
         return historialAcciones.peek().getDescriptionUseRealized();
     }
 
-    /**
-    * Gets the modification type of the last action performed.
-    *
-    * @return The type of modification (1 for creation, 2 for editing, 3 for deletion).
-    */
     public int obtenerMoficiacion(){
         return historialAcciones.peek().getTypeModification();
     }
 
-    /**
-    * Gets the last task recorded in the action history.
-    *
-    * @return The last task recorded in the action history.
-    */
     public Task obtenerUltimaTarea(){
         return historialAcciones.peek();
     }
 
-    /**
-    * Undoes the last action performed.
-    *
-    * @param tarea The task associated with the action to be undone.
-    * @return true if the action was undone successfully, false otherwise.
-    */
     public boolean deshacerAccion(Task tarea){
         if(tarea.getTypeModification()==1){
             deleteTask(tarea.getIdentifier());
@@ -289,4 +189,4 @@ public class RSystem {
         
         return false;
     }
-}
+}   

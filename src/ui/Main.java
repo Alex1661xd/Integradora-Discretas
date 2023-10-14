@@ -1,4 +1,5 @@
 package ui;
+import java.time.LocalDate;
 import java.util.Scanner;
 import model.RSystem;
 
@@ -49,8 +50,9 @@ public class Main {
                     System.out.println("3. Show tasks in order of arrival");
                     System.out.println("4. Show action history");
                     System.out.println("5. Deshacer accion");
+                    System.out.println("6. Show priority Queue");
                     System.out.println("-------------------------");
-                    System.out.println("6. Back");
+                    System.out.println("7. Back");
                     System.out.print(colorAzul + "\n>> " + resetColor);
 
                     int optionMenu2 = reader.nextInt();
@@ -62,7 +64,7 @@ public class Main {
                         case 2:
                             deleteTaskReminder();
                             break;
-                        case 6:
+                        case 7:
                             System.out.println(colorMorado + "\n╔══════════════════════╗");
                             System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
                             System.out.println("╚══════════════════════╝" + resetColor);
@@ -81,6 +83,11 @@ public class Main {
 
                             break;
 
+                        case 6:
+                            System.out.println("Estas son las acciones de prioridad");
+                            printPriorityQueue();
+                            break;
+
                     }
 
                     break;
@@ -92,7 +99,7 @@ public class Main {
         }
     }
 
-    private static void addReminderTask() {
+    private static void addReminderTask() throws Exception {
         System.out.println("\nEnter the identifier");
         reader.nextLine();
         String identifier=reader.nextLine();
@@ -100,17 +107,31 @@ public class Main {
         String title = reader.nextLine();
         System.out.println("\nEnter the description");
         String descripcion = reader.nextLine();
-        System.out.println("\nEnter the deadline (dd/MM/yyyy)");
-        String fecha = reader.nextLine();
+        LocalDate fechaL=null;
+        while(true){
+            System.out.println("\nEnter the deadline (dd/MM/yyyy)");
+            String fecha = reader.nextLine();
+            
+                try {
+                    fechaL=controller.convertStringToLocalDate(fecha);
+                    break;
+                } catch (java.time.format.DateTimeParseException e) {
+                System.err.println("Error al parsear la fecha: (Ingrese una fecha valida, verifique el formato)");
+            }
+        }
+        
+
         System.out.println("\nIs it a priority??");
         System.out.println("1. SI\n2. NO");
         int priority = reader.nextInt();
 
-        if(controller.addTask(identifier, title, descripcion, fecha, priority)){
-            System.out.println(colorVerde + "\nAdded successfully");
+        if(controller.addTask(identifier, title, descripcion, fechaL, priority)){
+                    System.out.println(colorVerde + "\nAdded successfully");
         }else{
-            System.out.println(colorRojo + "\nAn error occurred while adding");
+                System.out.println(colorRojo + "\nAn error occurred while adding");
         }
+        
+        
         
     }
 
@@ -125,7 +146,7 @@ public class Main {
         String id = reader.nextLine();
         System.out.println(controller.taskValue(id));
 
-        System.out.println("\nWhat elements do you want to change?\n\n1.Identifier\n2.Title\n3.Description\n4.Priority date");
+        System.out.println("\nWhat elements do you want to change?\n\n1.Identifier\n2.Title\n3.Description");
         int option=reader.nextInt();
         String nuevoValor=null;
         if(option==1){
@@ -176,6 +197,10 @@ public class Main {
 
     private static void printHistorial(){
         System.out.println(controller.printHistorial());
+    }
+
+    private static void printPriorityQueue(){
+        System.out.println(controller.printPriorityQueue());
     }
 
     private static void printLastAction(){
