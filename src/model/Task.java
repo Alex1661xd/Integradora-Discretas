@@ -81,37 +81,6 @@ public class Task {
             return 1;  // current date is later
         }
     }
-<<<<<<< HEAD
-    
-    public int getTypeModification() {
-        return typeModification;
-    }
-
-    public void setTypeModification(int typeModification) {
-        this.typeModification = typeModification;
-    }
-
-    public String getValorAnterior() {
-        return valorAnterior;
-    }
-
-    public void setValorAnterior(String valorAnterior) {
-        this.valorAnterior = valorAnterior;
-    }
-
-    public int getPosicionEditAtributo() {
-        return posicionEditAtributo;
-    }
-
-    public void setPosicionEditAtributo(int posicionEditAtributo) {
-        this.posicionEditAtributo = posicionEditAtributo;
-    }
-
-    
-
-}
-=======
        
 
 }
->>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd

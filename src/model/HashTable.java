@@ -32,11 +32,7 @@ public class HashTable<K, V> implements IHashTable<K,V> {
     public void insert(K key, V value) {
         int index = FunctionHash(key); // Calculate the index using the hash function
     
-<<<<<<< HEAD
-        NodeHT<K, V> newNode = new NodeHT<>(key, value); // Create a new node with the key and value
-=======
-        Node<K, V> newNode = new Node<>(key, value); // Crea un nuevo nodo con la clave y el valor
->>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd
+        Node<K, V> newNode = new Node<>(key, value); // Create a new node with the key and value
     
         if (table[index] == null) {
             // If there is no node at that index, set the new node at that index
@@ -64,13 +60,8 @@ public class HashTable<K, V> implements IHashTable<K,V> {
             // No node was found at that index, return null or do the appropriate handling
             return null;
         } else {
-<<<<<<< HEAD
-            // Loops through the linked list at that index to find the key and return the associated value
-            NodeHT<K, V> currentNode = table[index];
-=======
             // Recorre la lista enlazada en ese índice para buscar la clave y devolver el valor asociado
             Node<K, V> currentNode = table[index];
->>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd
             while (currentNode != null) {
                 if (currentNode.getKey().equals(key)) {
                     return currentNode.getValue(); // Key found, returns associated value
