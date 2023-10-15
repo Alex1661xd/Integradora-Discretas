@@ -53,8 +53,7 @@ public class HashTest extends TestCase {
     @Test
     public void testColisiones() {
         
-        hashTable.insert("cola", 4);
-        
+        hashTable.insert("cola", 4); 
         assertEquals(Integer.valueOf(4), hashTable.search("cola"));
         hashTable.insert("cola", 3);
          assertEquals(Integer.valueOf(3), hashTable.search("cola"));
