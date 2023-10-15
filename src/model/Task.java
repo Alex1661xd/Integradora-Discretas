@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Task {
     
-
     private String title;
     private String identifier;
     private String description;
