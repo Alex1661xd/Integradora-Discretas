@@ -63,13 +63,19 @@ public class Stack<T> {
 
     public String printStack() {
         Node<T> current = top;
-        String msg="    Stack: ";
+        String msg="    Stack: \n";
         while (current != null) {
-            msg+=((Task)current.data).getDescriptionUseRealized() + "\n";
+            if(((Action)current.data).getTypeAction()==TypeAction.EDIT){
+                msg+=((Action)current.data).ToStringEdit()+"\n";
+            }else{
+                msg+="\n"+((Action)current.data).ToStringN()+"\n";
+            }
             current = current.next;
         }
         return msg;// Imprime una línea en blanco al final para una mejor presentación.
     }
+
+
     
 
     

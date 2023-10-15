@@ -203,30 +203,30 @@ public class Main {
         System.out.println(controller.printPriorityQueue());
     }
 
-    private static void printLastAction(){
-        System.out.println(controller.printLastAction());
-        System.out.println("Estas seguro que deseas deshacer esta accion?");
-        if(controller.obtenerMoficiacion()==1){
-            System.out.println("Se va a eliminar esta tarea recientemente creada");
-        }else if(controller.obtenerMoficiacion()==2){
-            System.out.println("Se va a restaurar el estado anterior de la tarea (Antes de editar)");
+     private static void printLastAction(){
+         System.out.println(controller.printLastAction());
+         System.out.println("Estas seguro que deseas deshacer esta accion?");
+         if(controller.obtenerMoficiacion()==1){
+             System.out.println("Se va a eliminar esta tarea recientemente creada");
+         }else if(controller.obtenerMoficiacion()==2){
+             System.out.println("Se va a restaurar el estado anterior de la tarea (Antes de editar)");
         }else if(controller.obtenerMoficiacion()==3){
-            System.out.println("Se va a restaurar la tarea eliminada");
-        }
-        while(true){
-            System.out.println("1. SI\n2. NO");
-            int confirmar=reader.nextInt();
-            if(confirmar==1){
-                if(controller.deshacerAccion(controller.obtenerUltimaTarea())){
-                    System.out.println("Se deshizo la ultima accion con exito");
-                    break;
-                }
-            }else if(confirmar>2||confirmar<1){
-                System.out.println("No es una opcion valida");
-            }else{
-                break;
-            }
-        }
+             System.out.println("Se va a restaurar la tarea eliminada");
+         }
+         while(true){
+             System.out.println("1. SI\n2. NO");
+             int confirmar=reader.nextInt();
+             if(confirmar==1){
+                 if(controller.deshacerAccion()){
+                     System.out.println("Se deshizo la ultima accion con exito");
+                     break;
+                 }
+             }else if(confirmar>2||confirmar<1){
+                 System.out.println("No es una opcion valida");
+             }else{
+                 break;
+             }
+         }
         
-    }
+     }
 }
