@@ -18,8 +18,11 @@ public class HashTable<K, V> implements IHashTable<K,V> {
     * @return The calculated index for the key.
     */
     public int FunctionHash(K key) {
-        return key.hashCode()%size;
+        int hashCode = key.hashCode();
+        int index = Math.abs(hashCode) % size;
+        return index;
     }
+    
 
 
     /**
