@@ -56,6 +56,7 @@ public class HashTest extends TestCase {
         hashTable.insert("cola", 4); 
         assertEquals(Integer.valueOf(4), hashTable.search("cola"));
         hashTable.insert("cola", 3);
+        
          assertEquals(Integer.valueOf(3), hashTable.search("cola"));
     }
 }
