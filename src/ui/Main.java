@@ -20,9 +20,9 @@ public class Main {
 
         boolean flag = true;
 
-        System.out.println(colorMorado + "╔══════════════════════╗");
-        System.out.println("║" + resetColor + "       ¡Welcome!      " + colorMorado + "║");
-        System.out.println("╚══════════════════════╝" + resetColor);
+        System.out.println(colorMorado + "-------------------------");
+        System.out.println("|" + resetColor + "       ¡Welcome!      " + colorMorado + "|");
+        System.out.println("-------------------------" + resetColor);
 
         while(flag) {
 
@@ -41,9 +41,9 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println(colorMorado + "\n╔══════════════════════╗");
-                    System.out.println("║" + resetColor + "      ¡Options!      " + colorMorado + " ║");
-                    System.out.println("╚══════════════════════╝" + resetColor);
+                    System.out.println(colorMorado + "\n-------------------------");
+                    System.out.println("|" + resetColor + "      ¡Options!      " + colorMorado + " |");
+                    System.out.println("-------------------------" + resetColor);
 
                     System.out.println("\n1. Edit task ");
                     System.out.println("2. Delete task");
@@ -65,9 +65,9 @@ public class Main {
                             deleteTaskReminder();
                             break;
                         case 7:
-                            System.out.println(colorMorado + "\n╔══════════════════════╗");
-                            System.out.println("║" + resetColor + "        ¡MENU!     " + colorMorado + "   ║");
-                            System.out.println("╚══════════════════════╝" + resetColor);
+                            System.out.println(colorMorado + "\n-------------------------");
+                            System.out.println("|" + resetColor + "        ¡MENU!     " + colorMorado + "   |");
+                            System.out.println("-------------------------" + resetColor);
                             flag = false;
                             break;
                         case 3:
