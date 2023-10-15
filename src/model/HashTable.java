@@ -2,13 +2,13 @@ package model;
 
 public class HashTable<K, V> implements IHashTable<K,V> {
 
-    private NodeHT<K, V>[] table;
+    private Node<K, V>[] table;
     private int size;
 
 
     public HashTable(int size) {
         this.size=size;
-        this.table = new NodeHT[size];
+        this.table = new Node[size];
     }
 
     /**
@@ -32,7 +32,11 @@ public class HashTable<K, V> implements IHashTable<K,V> {
     public void insert(K key, V value) {
         int index = FunctionHash(key); // Calculate the index using the hash function
     
+<<<<<<< HEAD
         NodeHT<K, V> newNode = new NodeHT<>(key, value); // Create a new node with the key and value
+=======
+        Node<K, V> newNode = new Node<>(key, value); // Crea un nuevo nodo con la clave y el valor
+>>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd
     
         if (table[index] == null) {
             // If there is no node at that index, set the new node at that index
@@ -60,8 +64,13 @@ public class HashTable<K, V> implements IHashTable<K,V> {
             // No node was found at that index, return null or do the appropriate handling
             return null;
         } else {
+<<<<<<< HEAD
             // Loops through the linked list at that index to find the key and return the associated value
             NodeHT<K, V> currentNode = table[index];
+=======
+            // Recorre la lista enlazada en ese índice para buscar la clave y devolver el valor asociado
+            Node<K, V> currentNode = table[index];
+>>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd
             while (currentNode != null) {
                 if (currentNode.getKey().equals(key)) {
                     return currentNode.getValue(); // Key found, returns associated value
@@ -87,13 +96,13 @@ public class HashTable<K, V> implements IHashTable<K,V> {
             // No node was found in that index, there is nothing to delete
             return false;
         } else {
-            NodeHT<K, V> currentNode = table[index];
-            NodeHT<K, V> previousNode = null;
+            Node<K, V> currentNode = table[index];
+            Node<K, V> previousNode = null;
     
             // Find the node with the key to delete it
             while (currentNode != null) {
                 if (currentNode.getKey().equals(key)) {
-                    NodeHT<K, V> nextNode = currentNode.getNext();
+                    Node<K, V> nextNode = currentNode.getNext();
     
                     // Update references to remove the node
                     if (previousNode != null) {
@@ -131,7 +140,7 @@ public class HashTable<K, V> implements IHashTable<K,V> {
             }else{
                 stringBuilder.append("Index [").append(i).append("]: ");
 
-                NodeHT<K, V> currentNode = table[i];
+                Node<K, V> currentNode = table[i];
 
                 while (currentNode != null) {
                     stringBuilder.append("\n- (").append(currentNode.getKey()).append(", ").append(((Task)currentNode.getValue()).getTitle()).append(") ");

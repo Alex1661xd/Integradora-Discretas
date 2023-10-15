@@ -9,18 +9,13 @@ public class Task {
     private String description;
     private LocalDate date;
     private TypePriority TipoPrioridad;
-    private String descriptionUseRealized;
-    private int typeModification;
-    private String valorAnterior;
-    private int posicionEditAtributo;
     
-    public Task(String title, String description, LocalDate date, TypePriority TipoPrioridad, String identifier, String descriptionUseRealized) {
+    public Task(String title, String description, LocalDate date, TypePriority TipoPrioridad, String identifier) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.TipoPrioridad= TipoPrioridad;
         this.identifier=identifier;
-        this.descriptionUseRealized=descriptionUseRealized;
     }
     
     public void setDate(LocalDate date) {
@@ -40,15 +35,6 @@ public class Task {
         return date;
     }
 
-    public String getDescriptionUseRealized() {
-        return descriptionUseRealized;
-    }
-
-    public void setDescriptionUseRealized(String descriptionUseRealized) {
-        this.descriptionUseRealized = descriptionUseRealized;
-    }
-
-    
 
     public String getTitle() {
         return title;
@@ -66,16 +52,6 @@ public class Task {
         this.description = description;
     }
 
-    /*public Date convertStringToDate(){
-        SimpleDateFormat formato = new SimpleDateFormat("MM/dd/yyyy");
-        Date fecha=null;
-        try {
-            fecha = formato.parse(this.date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return fecha;
-    }*/
 
     @Override
     public String toString() {
@@ -105,6 +81,7 @@ public class Task {
             return 1;  // current date is later
         }
     }
+<<<<<<< HEAD
     
     public int getTypeModification() {
         return typeModification;
@@ -133,3 +110,8 @@ public class Task {
     
 
 }
+=======
+       
+
+}
+>>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd
