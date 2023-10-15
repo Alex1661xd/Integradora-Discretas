@@ -66,15 +66,52 @@ public class Task {
         this.identifier = identifier;
     }
 
+    /**
+    * Compare this date with another LocalDate.
+    *
+    * @param fechaComparar The date to compare with.
+    * @return -1 if the current date is earlier, 0 if the dates are the same, 1 if the current date is later.
+    */
     public int compareTo(LocalDate fechaComparar) {
         if (this.date.isBefore(fechaComparar)) {
-            return -1; // Fecha actual es anterior
+            return -1; // current date is earlier
         } else if (this.date.equals(fechaComparar)) {
-            return 0;  // Fechas son iguales
+            return 0;  // the dates are the same
         } else {
-            return 1;  // Fecha actual es posterior
+            return 1;  // current date is later
         }
     }
+<<<<<<< HEAD
+    
+    public int getTypeModification() {
+        return typeModification;
+    }
+
+    public void setTypeModification(int typeModification) {
+        this.typeModification = typeModification;
+    }
+
+    public String getValorAnterior() {
+        return valorAnterior;
+    }
+
+    public void setValorAnterior(String valorAnterior) {
+        this.valorAnterior = valorAnterior;
+    }
+
+    public int getPosicionEditAtributo() {
+        return posicionEditAtributo;
+    }
+
+    public void setPosicionEditAtributo(int posicionEditAtributo) {
+        this.posicionEditAtributo = posicionEditAtributo;
+    }
+
+    
+
+}
+=======
        
 
 }
+>>>>>>> 61ece653d5d44f0c8051972b3210fc246aebf4bd

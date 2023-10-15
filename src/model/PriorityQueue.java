@@ -10,20 +10,31 @@ public class PriorityQueue{
         size = 0;
     }
 
+    /**
+    * Insert a new task into the priority queue.
+    *
+    * @param value The task to add to the priority queue.
+    */
     public void insert(Task value) {
         if (size == heap.length) {
-            // Si el arreglo está lleno, agrandamos el arreglo
+            // If the array is full, we enlarge the array
             ensureCapacity();
         }
 
-        // Agregar el nuevo elemento al final del arreglo
+        // Add the new element to the end of the array
         heap[size] = value;
         size++;
 
-        // Reorganizar el arreglo para mantener la propiedad de la cola de prioridad
+        // Reorganize the array to maintain priority queue ownership
         bubbleUp();
     }
 
+    /**
+    * Delete and return the task with the highest priority in the priority queue.
+    *
+    * @return The task with the highest priority in the priority queue.
+    * @throws IllegalStateException If the priority queue is empty.
+    */
     public Task remove() {
         if (isEmpty()) {
             throw new IllegalStateException("La cola de prioridad está vacía");
@@ -31,40 +42,54 @@ public class PriorityQueue{
 
         Task root = heap[0];
 
-        // Mover el último elemento al inicio del arreglo
+        // Move the last element to the beginning of the array
         heap[0] = heap[size - 1];
         size--;
 
-        // Reorganizar el arreglo para mantener la propiedad de la cola de prioridad
+        // Reorganize the array to maintain priority queue ownership
         bubbleDown();
 
         return root;
     }
 
+    /**
+    * Checks if the priority queue is empty.
+    *
+    * @return true if the priority queue is empty, false otherwise.
+    */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+    * Increases the capacity of the array if it is full.
+    */
     private void ensureCapacity() {
         heap = Arrays.copyOf(heap, heap.length * 2);
     }
 
+    /**
+    * Scroll up the array to restore the priority queue property.
+    */
     private void bubbleUp() {
         int index = size - 1;
         while (index > 0) {
             int parentIndex = (index - 1) / 2;
             if (heap[index].compareTo(heap[parentIndex].getDate())==-1) {
-                // Intercambiar el elemento con su padre si es menor
+                // Swap the element with its parent if it is smaller
                 Task temp = heap[index];
                 heap[index] = heap[parentIndex];
                 heap[parentIndex] = temp;
                 index = parentIndex;
             } else {
-                break; // La propiedad de la cola de prioridad se mantiene
+                break; // Priority queue ownership is maintained
             }
         }
     }
 
+    /**
+    * Scroll down the array to restore the priority queue property.
+    */
     private void bubbleDown() {
         int index = 0;
         while (true) {
@@ -81,17 +106,22 @@ public class PriorityQueue{
             }
 
             if (smallest != index) {
-                // Intercambiar con el hijo más pequeño
+                // Exchange with the youngest child
                 Task temp = heap[index];
                 heap[index] = heap[smallest];
                 heap[smallest] = temp;
                 index = smallest;
             } else {
-                break; // La propiedad de la cola de prioridad se mantiene
+                break; // Priority queue ownership is maintained
             }
         }
     }
 
+    /**
+    * Gets a string representation of the priority queue and its elements.
+    *
+    * @return A string representing the priority queue information and its elements.
+    */
     public String showPriorityQueue(){
         String msg="";
         while (!isEmpty()) {

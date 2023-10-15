@@ -12,8 +12,19 @@ public class Stack<T> {
             this.next = null;
         }
     }
-    //Añade un elemento a la cima
 
+    public Node<T> getTop() {
+        return top;
+    }
+    public void setTop(Node<T> top) {
+        this.top = top;
+    }
+    
+    /**
+    * Adds an element to the top of the stack.
+    *
+    * @param item The item to add to the stack.
+    */
     public void push(T item) {
         Node<T> newNode = new Node<>(item);
         if (top == null) {
@@ -23,7 +34,13 @@ public class Stack<T> {
             top = newNode;
         }
     }
-    //Elimina el elemento de la cima y el valor del elemto
+
+    /**
+    * Remove and return the element at the top of the stack.
+    *
+    * @return The element at the top of the stack.
+    * @throws IllegalStateException If the stack is empty.
+    */
     public T pop() {
         if (isEmpty()) {
             throw new IllegalStateException("El usuario no ha realizado acciones");
@@ -32,8 +49,13 @@ public class Stack<T> {
         top = top.next;
         return data;
     }
-    //Muestra el elemento de la cima
 
+    /**
+    * Gets the element on top of the stack without removing it.
+    *
+    * @return The element at the top of the stack.
+    * @throws IllegalStateException If the stack is empty.
+    */
     public T peek() {
         if (isEmpty()) {
             throw new IllegalStateException("La pila está vacía.");
@@ -41,10 +63,20 @@ public class Stack<T> {
         return top.data;
     }
 
+    /**
+    * Check if the stack is empty.
+    *
+    * @return true if the stack is empty, false otherwise.
+    */
     public boolean isEmpty() {
         return top == null;
     }
 
+    /**
+    * Gets the number of elements in the stack.
+    *
+    * @return The number of elements on the stack.
+    */
     public int size() {
         int count = 0;
         Node<T> current = top;
@@ -54,13 +86,13 @@ public class Stack<T> {
         }
         return count;
     }
-    public Node<T> getTop() {
-        return top;
-    }
-    public void setTop(Node<T> top) {
-        this.top = top;
-    }
+ 
 
+    /**
+    * Gets a string representation of the stack and its elements.
+    *
+    * @return A string representing the stack information and its elements.
+    */
     public String printStack() {
         Node<T> current = top;
         String msg="    Stack: \n";
